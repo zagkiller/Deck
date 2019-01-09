@@ -11,7 +11,7 @@ export function* authorize (api, { login, pass }) {
         pass,
     });
 
-    if (loginResponse.ok) {
+    if (loginResponse.ok && loginResponse.data) {
         const res = loginResponse.data;
         if(res.error) {
             yield put(UserActions.authFailure(res));
@@ -30,7 +30,7 @@ export function* signUp(api, { login, pass, name }) {
         name
     });
 
-    if (loginResponse.ok) {
+    if (loginResponse.ok && loginResponse.data) {
         const res = loginResponse.data;
         if (res.error) {
             yield put(UserActions.regFailure(res));
@@ -42,6 +42,26 @@ export function* signUp(api, { login, pass, name }) {
     }
 }
 
+export function* update(api, { name }) {
+    const token = yield select(getToken);
+    const loginResponse = yield call(api.userUpdate, {
+        token,
+        name
+    });
+    console.log(loginResponse);
+    if (loginResponse.ok && loginResponse.data) {
+        const res = loginResponse.data;
+        if (res.error) {
+            yield put(UserActions.updateFailure(res));
+        } else {
+            console.log(res);
+            yield put(UserActions.updateSuccess({value: res}));
+        }
+    } else {
+        yield put(UserActions.updateFailure({error: 'Изменить данные не удалось, попробуйте позже'}));
+    }
+}
+
 export function* logout(api) {
     console.log('logout');
     try {
@@ -50,7 +70,7 @@ export function* logout(api) {
         token,
     });
 
-    if (loginResponse.ok) {
+    if (loginResponse.ok && loginResponse.data) {
         const res = loginResponse.data;
         if (res.error) {
             yield put(UserActions.logoutFailure(res));

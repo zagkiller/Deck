@@ -13,6 +13,10 @@ const { Types, Creators } = createActions({
     regSuccess: { value: {} },
     regFailure: { error: '' },
 
+    updateRequest: { name: '' },
+    updateSuccess: { value: {} },
+    updateFailure: { error: '' },
+
     logoutRequest: { },
     logoutSuccess: { },
     logoutFailure: { error: '' },
@@ -24,9 +28,8 @@ export default Creators;
 // the initial state of this reducer
 export const INITIAL_STATE = Immutable({
     error: false,
-    login: "",
-    pass: "",
-    name: "",
+    name: '',
+    token: undefined,
     fetching: false,
 });
 
@@ -47,8 +50,8 @@ export const regSuccess = (state, { value } ) => state.merge({
     });
 
 export const authRequest = (state, { login, pass }) => state.merge({
-    fetching: true,
-});
+        fetching: true,
+    });
 
 export const authSuccess = (state, { value } ) => state.merge({
         fetching: false,
@@ -58,6 +61,21 @@ export const authSuccess = (state, { value } ) => state.merge({
     });
 
 export const authFailure = (state, { error }) =>
+     state.merge({
+        fetching: false,
+        error,
+    });
+
+export const updateRequest = (state, { name }) => state.merge({
+        fetching: true,
+    });
+
+export const updateSuccess = (state, { value } ) => state.merge({
+        fetching: false,
+        name: value.name,
+    });
+
+export const updateFailure = (state, { error }) =>
      state.merge({
         fetching: false,
         error,
@@ -81,6 +99,10 @@ export const reducer =  createReducer(INITIAL_STATE, {
     [Types.AUTH_REQUEST]: authRequest,
     [Types.AUTH_SUCCESS]: authSuccess,
     [Types.AUTH_FAILURE]: authFailure,
+    //
+    [Types.UPDATE_REQUEST]: updateRequest,
+    [Types.UPDATE_SUCCESS]: updateSuccess,
+    [Types.UPDATE_FAILURE]: updateFailure,
 
     [Types.LOGOUT_REQUEST]: logoutRequest,
     [Types.LOGOUT_SUCCESS]: logoutSuccess,

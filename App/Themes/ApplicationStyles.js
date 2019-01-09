@@ -1,4 +1,3 @@
-import Typography from './Typography'
 import Metrics from './Metrics'
 import Colors from './Colors'
 

@@ -3,6 +3,7 @@ import configureStore from './CreateStore';
 import rootSaga from '../Sagas';
 import {persistReducer} from "redux-persist";
 import { AsyncStorage } from 'react-native'
+import immutablePersistenceTransform from '../Services/ImmutablePersistenceTransform'
 
 /* ------------- Assemble The Reducers ------------- */
 export const reducers = combineReducers({
@@ -12,6 +13,7 @@ export const reducers = combineReducers({
 const persistConfig = {
     key: 'root',
     storage: AsyncStorage,
+    transforms: [immutablePersistenceTransform]
 }
 
 export default () => {

@@ -7,15 +7,22 @@ export default StyleSheet.create({
 
     container: {
         flex: 1,
-        margin: Metrics.doubleMargin,
-        backgroundColor: '#0f0'
+        margin: Metrics.margin4x,
     },
     auth: {
         flex: 1,
         margin: Metrics.doubleMargin,
         flexDirection: 'column',
-        justifyContent: 'flex-start',
-        backgroundColor: '#0f0'
+        justifyContent: 'space-between',
+    },
+    error: {
+        height: 32,
+    },
+    space32: {
+        height: 32,
+    },
+    space16: {
+        height: 16,
     },
 
 })

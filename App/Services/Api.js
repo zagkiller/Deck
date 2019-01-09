@@ -23,19 +23,26 @@ const create = (baseURL = '') => {
 
     /* User functions */
     const userLogin = ({ login, pass }) =>  api.get(baseURL,
-            {
-                action: 'auth',
-                login,
-                pass,
-            });
+        {
+            action: 'auth',
+            login,
+            pass,
+        });
 
     const userSignUp = ({ login, pass, name }) => api.get(baseURL,
-            {
-                action: 'reg',
-                login,
-                pass,
-                name,
-            });
+        {
+            action: 'reg',
+            login,
+            pass,
+            name,
+        });
+
+    const userUpdate = ({ token, name }) => api.get(baseURL,
+        {
+            action: 'update',
+            token,
+            name,
+        });
     //
     const userLogout = ({ token }) => api.get(baseURL,
         {
@@ -52,6 +59,7 @@ const create = (baseURL = '') => {
         userLogin,
         userSignUp,
         userLogout,
+        userUpdate,
         fake,
     };
 };

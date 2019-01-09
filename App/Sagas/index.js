@@ -12,6 +12,7 @@ import {
     authorize,
     signUp,
     logout,
+    update,
     fake
 } from './UserSagas';
 
@@ -24,6 +25,7 @@ export default function* root() {
         // some sagas only receive an action
         takeLatest(UserTypes.AUTH_REQUEST, authorize, userApi),
         takeLatest(UserTypes.REG_REQUEST, signUp, userApi),
+        takeLatest(UserTypes.UPDATE_REQUEST, update, userApi),
         takeLatest(UserTypes.LOGOUT_REQUEST, logout, userApi),
     ]);
 }
