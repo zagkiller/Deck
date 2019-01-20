@@ -5,6 +5,7 @@ import Constants from '../Config/Constants';
 /* ------------- Types ------------- */
 
 import { UserTypes } from '../Redux/UserRedux';
+import { RoomTypes } from '../Redux/RoomRedux';
 
 /* ------------- Sagas ------------- */
 
@@ -13,11 +14,17 @@ import {
     signUp,
     logout,
     update,
-    fake
 } from './UserSagas';
+
+import {
+    createRoom,
+    findRoom,
+} from './RoomSagas';
 
 /* ------------- API ------------- */
 export const userApi = API.create(Constants.apiBaseUrl + Constants.apiUserUrl);
+const roomApi = API.create(Constants.apiBaseUrl + Constants.apiRoomUrl);
+
 /* ------------- Connect Types To Sagas ------------- */
 
 export default function* root() {
@@ -27,5 +34,8 @@ export default function* root() {
         takeLatest(UserTypes.REG_REQUEST, signUp, userApi),
         takeLatest(UserTypes.UPDATE_REQUEST, update, userApi),
         takeLatest(UserTypes.LOGOUT_REQUEST, logout, userApi),
+
+        takeLatest(RoomTypes.CREATE_REQUEST, createRoom, roomApi),
+        takeLatest(RoomTypes.FIND_REQUEST, findRoom, roomApi),
     ]);
 }

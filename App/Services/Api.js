@@ -43,24 +43,34 @@ const create = (baseURL = '') => {
             token,
             name,
         });
-    //
+
     const userLogout = ({ token }) => api.get(baseURL,
         {
             action: 'logout',
             token
         });
 
-    const fake = () => {
-        console.log('aaaa', baseURL, Constants.apiBaseUrl+Constants.apiUserUrl);
-        return  api.get('http://192.168.0.104/cardapi/user', {action: 'auth', login: 'xxx', pass:'xxx'});
-    };
+    const roomCreate = ({ token, name }) => api.get(baseURL,
+        {
+            action: 'create',
+            token,
+            name
+        });
+
+    const roomFind = ({ token, name }) => api.get(baseURL,
+        {
+            action: 'find',
+            token,
+            name
+        });
 
     return {
         userLogin,
         userSignUp,
         userLogout,
         userUpdate,
-        fake,
+        roomCreate,
+        roomFind,
     };
 };
 

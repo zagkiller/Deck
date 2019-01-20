@@ -13,7 +13,7 @@ const { Types, Creators } = createActions({
     regSuccess: { value: {} },
     regFailure: { error: '' },
 
-    updateRequest: { name: '' },
+    updateRequest: { name: '', avatar: '' },
     updateSuccess: { value: {} },
     updateFailure: { error: '' },
 
@@ -29,6 +29,7 @@ export default Creators;
 export const INITIAL_STATE = Immutable({
     error: false,
     name: '',
+    avatar: '',
     token: undefined,
     fetching: false,
 });
@@ -58,6 +59,7 @@ export const authSuccess = (state, { value } ) => state.merge({
         error: null,
         token: value.token,
         name: value.name,
+        avatar: value.avatar,
     });
 
 export const authFailure = (state, { error }) =>
@@ -66,13 +68,14 @@ export const authFailure = (state, { error }) =>
         error,
     });
 
-export const updateRequest = (state, { name }) => state.merge({
+export const updateRequest = (state, { name, avatar }) => state.merge({
         fetching: true,
     });
 
 export const updateSuccess = (state, { value } ) => state.merge({
         fetching: false,
         name: value.name,
+        avatar: value.avatar,
     });
 
 export const updateFailure = (state, { error }) =>

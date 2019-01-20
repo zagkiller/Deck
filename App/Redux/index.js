@@ -8,6 +8,7 @@ import immutablePersistenceTransform from '../Services/ImmutablePersistenceTrans
 /* ------------- Assemble The Reducers ------------- */
 export const reducers = combineReducers({
     user: require('./UserRedux').reducer,
+    room: require('./RoomRedux').reducer,
 });
 
 const persistConfig = {

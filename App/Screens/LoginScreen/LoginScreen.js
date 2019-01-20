@@ -33,7 +33,7 @@ class LoginScreen extends Component {
     }
 
     _gotoMain = () => {
-        this.props.navigation.navigate('ProfileScreen');
+        this.props.navigation.navigate('MainScreen');
     }
 
     _renderBody = () => {

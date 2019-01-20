@@ -4,11 +4,11 @@ import {View, Text, TextInput, Image} from 'react-native';
 import UserActions from "../../Redux/UserRedux";
 import { connect } from 'react-redux';
 
-import styles from './ProfileScreenStyle';
+import styles from './GameScreenStyle';
 import Button from "../../Shared/Button";
 import Label from "../../Shared/Label";
 
-class ProfileScreen extends Component {
+class GameScreen extends Component {
 
     constructor ( props ) {
         super(props);
@@ -48,7 +48,7 @@ class ProfileScreen extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.body}>
-                    <Label H2 >Личный кабинет: </Label>
+                    <Label H2 >Личный кабинет1111: </Label>
                     <View style={{margin: 16}}>
                         {this._renderAvatar()}
                         <Label>Имя: </Label>
@@ -97,5 +97,5 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(GameScreen);
  // export default ProfileScreen

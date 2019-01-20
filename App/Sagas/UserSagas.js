@@ -2,9 +2,6 @@ import { put, call, select } from 'redux-saga/effects';
 
 import UserActions, {getToken} from '../Redux/UserRedux';
 
-import NavigationService from '../Navigation/NavigationService';
-import Constants from "../Config/Constants";
-
 export function* authorize (api, { login, pass }) {
     const loginResponse = yield call(api.userLogin, {
         login,
@@ -42,19 +39,19 @@ export function* signUp(api, { login, pass, name }) {
     }
 }
 
-export function* update(api, { name }) {
+export function* update(api, { name, avatar }) {
     const token = yield select(getToken);
     const loginResponse = yield call(api.userUpdate, {
         token,
         name
     });
-    console.log(loginResponse);
+
     if (loginResponse.ok && loginResponse.data) {
         const res = loginResponse.data;
+        res.avatar = avatar;
         if (res.error) {
             yield put(UserActions.updateFailure(res));
         } else {
-            console.log(res);
             yield put(UserActions.updateSuccess({value: res}));
         }
     } else {
@@ -82,28 +79,5 @@ export function* logout(api) {
     }
     } catch (e) {
         console.log(e);
-    }
-}
-
-export function* fake(api, { login, pass }) {
-    console.log('fakeSaga', login, pass);
-    const loginResponse = yield call(api.fake, {
-        login,
-        pass,
-    });
-
-    if (loginResponse.ok) {
-        const res = loginResponse.data;
-        console.log( res.error, 'eee' );
-        if(res.error) {
-            yield put(UserActions.authauthFailure(res.error));
-        } else {
-            yield put(UserActions.authSuccess(res));
-        }
-        // try {
-        //     yield put(UserActions.authSuccess(res));
-        // } catch (e) {
-        //     console.log(e);
-        // }
     }
 }

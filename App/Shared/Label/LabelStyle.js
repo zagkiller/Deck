@@ -33,6 +33,13 @@ export default StyleSheet.create({
         lineHeight: 17,
         color: '#333333',
         textAlign: 'left'
+    },
+
+    error: {
+        fontSize: 14,
+        lineHeight: 17,
+        color: '#f00',
+        textAlign: 'left'
     }
 
 })
