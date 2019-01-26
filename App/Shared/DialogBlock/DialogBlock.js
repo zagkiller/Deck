@@ -51,7 +51,7 @@ class DialogBlock extends PureComponent {
     _renderBlocks = () => {
         return(
             <View>
-                {this._renderTextInput()}
+                {this.props.withoutInput ? null : this._renderTextInput() }
                 {this._renderError()}
                 {this._renderButtons()}
             </View>

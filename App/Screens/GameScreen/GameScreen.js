@@ -19,23 +19,6 @@ class GameScreen extends Component {
         }
     }
 
-    _saveProfile = () => {
-        this.props.updateProfile(this.state.name, this.state.avatar);
-    }
-
-    _clearProfile = () => {
-        this.props.navigation.navigate('MainScreen');
-    }
-
-    _renderAvatar = () => {
-        if(this.state.avatar) {
-            return (<Image
-                style={styles.avatar}
-                source={{uri: this.state.avatar}}
-            />);
-        }
-
-    }
     _renderImageStatus = (field) => {
         if(this.state[field] == this.props[field]) {
             return <Label H2 style={[styles.galka, {color: '#0f0'}]}> ✓ </Label>
@@ -45,34 +28,12 @@ class GameScreen extends Component {
     }
 
     render() {
+        const { room, userName } = this.props;
         return (
             <View style={styles.container}>
                 <View style={styles.body}>
-                    <Label H2 >Личный кабинет1111: </Label>
-                    <View style={{margin: 16}}>
-                        {this._renderAvatar()}
-                        <Label>Имя: </Label>
-                        <View style={styles.inputView}>
-                            <TextInput
-                                style={{height: 40, paddingLeft: 16, borderRadius: 10, borderColor: 'gray', borderWidth: 1, width: '75%'}}
-                                onChangeText={(name) => this.setState({name})}
-                                value={this.state.name}
-                            />
-                            {this._renderImageStatus('name')}
-                        </View>
-                        <Label>Аватарка: </Label>
-                        <View style={styles.inputView}>
-                            <TextInput
-                                style={{height: 40, paddingLeft: 16, borderRadius: 10, borderColor: 'gray', borderWidth: 1, width: '75%'}}
-                                onChangeText={(avatar) => this.setState({avatar})}
-                                value={this.state.avatar}
-                            />
-                            {this._renderImageStatus('avatar')}
-                        </View>
-                        <Button onPress={this._saveProfile} radius10 style={{margin: 32}}>
-                            <Label style={{color: '#e4002b'}}>Сохранить</Label>
-                        </Button>
-                    </View>
+                    <Label H2 >Комната {room.name} ({room.id_room})</Label>
+
                     <Button onPress={this._clearProfile} radius10 style={{marginBottom: 32}}>
                         <Label style={{color: '#e4002b'}}>Назад</Label>
                     </Button>
@@ -86,8 +47,10 @@ class GameScreen extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        name: state.user.name,
+        userName: state.user.name,
         avatar: state.user.avatar,
+        room: state.room,
+
     }
 }
 
@@ -98,4 +61,3 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameScreen);
- // export default ProfileScreen

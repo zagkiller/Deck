@@ -21,6 +21,6 @@ export default {
         bad_token: 'bad_token',
         bad_name: 'bad_name',
         bad_query: 'bad_query',
-    }
-
+    },
+    userStatus: ["root", "Админ", "зарос на админа", "игрок", "запрос игрока", "гость", "зритель", ",бан"],
 };

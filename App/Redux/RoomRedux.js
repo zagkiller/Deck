@@ -13,6 +13,8 @@ const { Types, Creators } = createActions({
     findSuccess: { value: {} },
     findFailure: { error: '' },
 
+    clearRequest: { },
+
     // deleteRequest: { name : '' },
     // deleteSuccess: { value: {} },
     // deleteFailure: { error: '' },
@@ -27,7 +29,7 @@ export const INITIAL_STATE = Immutable({
     error: false,
     name: '',
     owner_name: '',
-    id_room: '',
+    id_room: null,
     fetching: false,
 });
 
@@ -45,11 +47,17 @@ export const createSuccess = (state, { value } ) => state.merge({
 
 export const createFailure = (state, { error }) => state.merge({
     fetching: false,
+    name: '',
+    owner_name: '',
+    id_room: null,
     error,
 });
 
 export const findRequest = (state, { name }) => state.merge({
     fetching: true,
+    name: '',
+    owner_name: '',
+    id_room: null
 });
 
 export const findSuccess = (state, { value } ) => state.merge({
@@ -62,8 +70,11 @@ export const findSuccess = (state, { value } ) => state.merge({
 
 export const findFailure = (state, { error }) => state.merge({
     fetching: false,
+    id_room: null,
     error,
 });
+
+export const clearRequest = state => INITIAL_STATE;
 
 // map our action types to our reducer functions
 export const reducer =  createReducer(INITIAL_STATE, {
@@ -75,6 +86,8 @@ export const reducer =  createReducer(INITIAL_STATE, {
     [Types.FIND_REQUEST]: findRequest,
     [Types.FIND_SUCCESS]: findSuccess,
     [Types.FIND_FAILURE]: findFailure,
+
+    [Types.CLEAR_REQUEST]: clearRequest,
 
 });
 

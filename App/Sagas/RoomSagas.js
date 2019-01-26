@@ -7,7 +7,6 @@ import NavigationService from '../Navigation/NavigationService';
 
 export function* createRoom (api, { name }) {
     const token = yield select(getToken);
-
     const response = yield call(api.roomCreate, {
         token,
         name,
@@ -34,7 +33,6 @@ export function* findRoom (api, { name }) {
         name,
     });
     if (response.ok && response.data) {
-        console.log(response.data);
         const res = response.data;
         if(res.error) {
 
